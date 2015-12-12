@@ -1,3 +1,27 @@
+# note, currently this expects you to have the aws boto python library available 
+
+# steps to kick off a series of scripts to build a basic AWS webapp infrastructure:
+
+1.  clone repo into <INSTALL_ROOT>
+2.  cd <INSTALL_ROOT>
+3.  cp aws-setup-scripts/config/client_configs/configuration_context.template /tmp/aws-config
+4.  edit /tmp/aws-config such that the following values are specified:
+
+# your company/application name (e.g. brs)
+app_name =
+# the region you want to launch in (e.g. us-east-1)
+aws_region =
+# your access and secret key (e.g. AKIA... and X6.../2e....)
+aws_access_key = 
+aws_secret_key =
+# the master password for your mysql RDS instance
+db_pwd =
+# the IP address of the location from which you will ssh into an ec2 instance
+user_home_ip = 
+
+5.  export AWS_CONFIG_FILE=/tmp/aws-config 
+6.  python create_aws_infrastructure.py 
+
 make sure to execute this if you're running a virtual env:
 
 source ~/.virtualenvs/boto/bin/activate

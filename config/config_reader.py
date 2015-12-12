@@ -19,9 +19,7 @@ bunk_section = 'root'
 cfg_str = '[' + bunk_section + ']\n' + open(config_file, 'r').read()
 cfg_fp = StringIO.StringIO(cfg_str)
 
-# config = ConfigParser.RawConfigParser()
 config = ConfigParser.ConfigParser()
-# config = ConfigParser.SafeConfigParser()
 config.readfp(cfg_fp)
 
 
@@ -31,10 +29,5 @@ keys = config.options(bunk_section)
 for key in keys:
     # try:
         cfg[key] = config.get(bunk_section, key, 0)
-        # if dict1[option] == -1:
     # except:
-    #     print("exception on %s!" % key)
-    #     cfg[key] = None
-
-
-print "cfg dict: ", cfg
+    #     do something....
