@@ -1,0 +1,55 @@
+#####################################################
+####    main config values
+#####################################################
+## NB!  you must set the following aws specific values!
+app_name = 
+aws_region = 
+aws_access_key = 
+aws_secret_key = 
+db_pwd = 
+user_home_ip = 
+
+
+#####################################################
+####    virtual private cloud configuration values
+#####################################################
+vpc_main_cidr = 10.0.0.0/16
+subnet_1_cidr = 10.0.0.0/24
+subnet_2_cidr = 10.0.1.0/24
+
+# availability zones 1 and 2 (incredibly important that 's' follows the parens)
+az_1 = %(aws_region)sb
+az_2 = %(aws_region)sc
+
+
+#####################################################
+####    security group configuration values
+#####################################################
+database_sg_name = database-sg
+webapp_sg_name = webapp-sg
+webapp_elb_sg_name = webapp-elb-sg
+
+
+#####################################################
+####    rds values
+#####################################################
+db_subnet_name = %(app_name)s-db-subnet-group
+db_instance_id = %(app_name)s-master
+db_user = %(app_name)sAdmin
+db_name = %(app_name)s
+db_allocated_storage = 10
+db_instance_type = db.t2.micro
+db_engine_type = MySQL
+
+
+#####################################################
+####    elastic load balancer values
+#####################################################
+elb_name = %(app_name)s-web-lb
+# the port backend http instances are listening on for forwarded requests
+webapp_instance_port = 8080
+
+# http url path the load balancer calls to check the health of the application  (e.g. HTTP:8080/hc/ping)
+# this rest endpoint must simply return http status code 200 if the webapp is up and serving requests
+health_check_url = /hc/ping
+

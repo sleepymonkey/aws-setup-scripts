@@ -1,0 +1,4 @@
+make sure to execute this if you're running a virtual env:
+
+source ~/.virtualenvs/boto/bin/activate
+
