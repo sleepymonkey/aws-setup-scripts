@@ -1,0 +1,20 @@
+###  NB!  i found these instructions in a dir and i believe these are the steps i followed in order
+###  to setup the boto package.  i could be wrong however...
+
+
+# give yourself the ability to create a virtual env
+sudo pip install virtualenv
+
+mkdir ~/.virtualenvs
+virtualenv ~/.virtualenvs/boto
+
+
+# this sets your virtual env
+source ~/.virtualenvs/boto/bin/activate
+
+# install boto inside your virtual env.  you will not be able to use boto library if you don't first source the above file
+pip install boto
+
+# sourcing the activate file above will put you into the virtual env
+# to bang out of the virtual env, type the following:
+deactivate
