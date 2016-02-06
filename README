@@ -32,7 +32,7 @@ source ~/.virtualenvs/boto/bin/activate
 
 # here's what i needed to do to complete a brand new acct
 
-+ create email address for new login (c.staging2@gmail.com)
++ create email address for new login (c.stg@gmail.com)
 + create aws acct with that email
 + once setup, login to aws and open IAM console
 + select group link from left menu and create group 'admin'
