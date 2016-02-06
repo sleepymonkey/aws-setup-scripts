@@ -26,7 +26,7 @@ def get_vpc_subnets():
     subnets = vpc_conn.get_all_subnets()
     for subnet in subnets:
         if subnet.vpc_id == vpc_obj.id:
-            print 'adding to db subnet group: %s %s %s' % (subnet.id, subnet.cidr_block, subnet.availability_zone)
+            print 'adding to subnet group: %s %s %s' % (subnet.id, subnet.cidr_block, subnet.availability_zone)
             subnet_ids.append(subnet.id)
 
     return subnet_ids

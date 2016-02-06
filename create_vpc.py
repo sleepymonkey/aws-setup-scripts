@@ -5,6 +5,8 @@ import aws_api_connections
 
 from config.config_reader import cfg
 
+
+
 def create_vpc_in_region():
     vpc_conn = aws_api_connections.get_vpc_connection_obj()
 
@@ -46,9 +48,28 @@ def create_vpc_in_region():
     vpc_conn.create_route(route_table.id, '0.0.0.0/0', gateway.id)
 
 
-    # create the 2 subnets in this VPC
-    subnet_1 = vpc_conn.create_subnet(vpc.id, cfg['subnet_1_cidr'], availability_zone=cfg['az_1'])
-    subnet_2 = vpc_conn.create_subnet(vpc.id, cfg['subnet_2_cidr'], availability_zone=cfg['az_2'])
+    # create the 2 subnets in this VPC.  for some reason, aws changes the available zones, so find 2 and move on
+    success_count = 0
+    suffixes = ['a', 'b', 'c', 'd', 'e']
+    for suffix in suffixes:
+        az = cfg['aws_region'] + suffix
+
+        # irritating.  i have to associate the availability zone with a cidr, so need the obnoxious if check below
+        try:
+            if success_count == 0:
+                subnet_1 = vpc_conn.create_subnet(vpc.id, cfg['subnet_1_cidr'], availability_zone=az)
+                success_count = 1
+                continue
+            if success_count == 1:
+                subnet_2 = vpc_conn.create_subnet(vpc.id, cfg['subnet_2_cidr'], availability_zone=az)
+                success_count = 2
+                break
+        except:
+            continue
+
+    # if we were unable to create the 2 availability zones, bail
+    if success_count < 2:
+        raise Exception("ERROR! unable to create 2 subnets in region " + cfg['aws_region'])
 
     # now add routes to each of our subnets
     vpc_conn.associate_route_table(route_table.id, subnet_1.id)

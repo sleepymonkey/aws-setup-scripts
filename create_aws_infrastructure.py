@@ -7,10 +7,14 @@ from create_load_balancer import create_elastic_load_balancer
 
 
 def generate_all_services():
+    # core services
     create_vpc_in_region()
     create_all_security_groups()
     create_new_db_instance()
     create_elastic_load_balancer()
+
+    # services/instances that are only created if properties were explicitly set (ami id, etc)
+    #create_ec2_from_ami()
 
 
 if __name__ == "__main__":

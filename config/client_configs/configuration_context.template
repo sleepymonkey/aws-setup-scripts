@@ -7,7 +7,15 @@ aws_region =
 aws_access_key = 
 aws_secret_key = 
 db_pwd = 
-user_home_ip = 
+user_home_ip =
+
+# describes the env.  typically dev, stg or prod
+aws_stack_type =
+
+# fill these out if you plan to run the ec2 script(s)
+ec2_ami = ami-58240332
+# where the scripts will write the private ssh key for your ec2 instance
+ec2_ssh_key_local_path =
 
 
 #####################################################
@@ -16,10 +24,6 @@ user_home_ip =
 vpc_main_cidr = 10.0.0.0/16
 subnet_1_cidr = 10.0.0.0/24
 subnet_2_cidr = 10.0.1.0/24
-
-# availability zones 1 and 2 (incredibly important that 's' follows the parens)
-az_1 = %(aws_region)sb
-az_2 = %(aws_region)sc
 
 
 #####################################################
@@ -53,3 +57,15 @@ webapp_instance_port = 8080
 # this rest endpoint must simply return http status code 200 if the webapp is up and serving requests
 health_check_url = /hc/ping
 
+
+#####################################################
+####    ec2 values
+#####################################################
+ec2_instance_type = t2.micro
+ec2_ssh_key_name = %(app_name)s-%(aws_stack_type)s-sshkey-%(aws_region)s
+
+
+#####################################################
+####    route53 values
+#####################################################
+app_domain_name =
