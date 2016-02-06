@@ -13,7 +13,7 @@ user_home_ip =
 aws_stack_type =
 
 # fill these out if you plan to run the ec2 script(s)
-ec2_ami = ami-58240332
+ec2_ami =  
 # where the scripts will write the private ssh key for your ec2 instance
 ec2_ssh_key_local_path =
 
